@@ -131,6 +131,7 @@ namespace VRStandardAssets.Utils
 
         private void HandleClick()
         {
+            Debug.Log("click");
             if (m_CurrentInteractible != null)
                 m_CurrentInteractible.Click();
         }

@@ -2,7 +2,7 @@
 using System.Collections;
 using MiniJSON;
 
-public class Api_pdf : MonoBehaviour
+public class ApiPdf : MonoBehaviour
 {
     [SerializeField]
     protected Material material;
@@ -48,10 +48,14 @@ public class Api_pdf : MonoBehaviour
                 string message = ja2.getJSONObject(i).getString("name");
 
                 JSONArray jPic = new JSONArray("[" + ja2.getJSONObject(i).getString("image_url").ToString() + "]");
+                string imgUrl = jPic.getJSONObject(0).getString("shop_image1");
 
-                StartCoroutine(getImg(jPic.getJSONObject(0).getString("shop_image1")));
+                if (imgUrl != ("{}"))
+                {
+                    StartCoroutine(getImg(jPic.getJSONObject(0).getString("shop_image1")));
 
-                Debug.Log(jPic.getJSONObject(0).getString("shop_image1"));
+                    Debug.Log(jPic.getJSONObject(0).getString("shop_image1"));
+                }
             }
         }
         else

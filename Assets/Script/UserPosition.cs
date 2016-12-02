@@ -36,7 +36,7 @@ public class UserPosition : MonoBehaviour {
                     cont = false;
                 }
                 int aux = 0;
-                for (int i = 0; i < limit ; i++)
+                for (int i = 1; i < limit ; i++)
                 {
                     GameObject user = (GameObject)Instantiate(prefab);
                     user.name = "user" + i;

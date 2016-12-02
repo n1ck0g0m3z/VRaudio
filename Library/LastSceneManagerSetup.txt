@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/usr0102328/Documents/OVR_UI_Demo_5_2/Assets/Scenes/Pointers.unity
+- path: Assets/Scenes/logIn.unity
   isLoaded: 1
   isActive: 1

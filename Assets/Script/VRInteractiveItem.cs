@@ -48,6 +48,7 @@ namespace VRStandardAssets.Utils
 
         public void Click()
         {
+            Debug.Log("click VR");
             if (OnClick != null)
                 OnClick();
         }
