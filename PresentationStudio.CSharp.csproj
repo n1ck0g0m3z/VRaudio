@@ -93,6 +93,7 @@
     <Compile Include="Assets\OVR\Scripts\Util\OVRWaitCursor.cs" />
     <Compile Include="Assets\Script\ApiPdf.cs" />
     <Compile Include="Assets\Script\AudioVisualizer.cs" />
+    <Compile Include="Assets\Script\GUI\GUI.cs" />
     <Compile Include="Assets\Script\HeadMovement.cs" />
     <Compile Include="Assets\Script\JSONArray.cs" />
     <Compile Include="Assets\Script\JSONObject.cs" />
