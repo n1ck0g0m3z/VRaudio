@@ -42,7 +42,7 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 7
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -71,7 +71,8 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000001, guid: 7c4a5e80d9dbb6b41a54771fca045e89,
+    type: 2}
   m_RuntimeCPUUsage: 25
 --- !u!196 &4
 NavMeshSettings:
@@ -122,7 +123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ae3a00751616fa0499c09fead5dc3bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numUsers: 50
+  numUsers: 9
   expoUser: {fileID: 1646163501}
   prefab: {fileID: 1000013815577818, guid: 71f3a40bce477ea44846f6c8eae5aab7, type: 2}
 --- !u!4 &89087421
@@ -370,7 +371,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ad6611d95a9ac7d45bc4da137220780c, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: ad6611d95a9ac7d45bc4da137220780c, type: 3}
       propertyPath: m_LocalScale.x
@@ -427,7 +428,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1213419947}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!23 &213625282
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2028,7 +2029,7 @@ Transform:
   - {fileID: 453099153}
   - {fileID: 1264603704}
   m_Father: {fileID: 1213419947}
-  m_RootOrder: 3
+  m_RootOrder: 4
 --- !u!4 &783952368 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011424105826, guid: 635c0447018b6f94a91aec2c63afe35e,
@@ -2139,7 +2140,7 @@ Transform:
   - {fileID: 1331863006}
   - {fileID: 418725172}
   m_Father: {fileID: 1213419947}
-  m_RootOrder: 4
+  m_RootOrder: 0
 --- !u!4 &850919849 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013725477300, guid: 635c0447018b6f94a91aec2c63afe35e,
@@ -2514,7 +2515,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010015984734, guid: a9e737c3fd6bd714aa6eddda5d737b71, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114000014046373646, guid: a9e737c3fd6bd714aa6eddda5d737b71,
         type: 2}

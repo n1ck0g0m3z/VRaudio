@@ -28,8 +28,10 @@ public class GUI : MonoBehaviour {
         }
     }
 
-	public void Join () {
-        SceneManager.LoadScene("BattleScene");
+	public void Join ()
+    {
+        room = GameObject.Find("RoomField").GetComponent<InputField>().text.ToString();
+        SceneManager.LoadScene("Main");
     }
 
     public void SignIn()
@@ -39,11 +41,8 @@ public class GUI : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("user_name",username);
         form.AddField("password",password);
-        WWW www = new WWW("http://192.168.200.168:4000/login", form);
+        WWW www = new WWW("http://192.168.200.168:4000/api/login", form);
         StartCoroutine(LogIn(www));
-        panel.SetActive(false);
-        panel = canvas.transform.Find("Menu").gameObject;
-        panel.SetActive(true);
     }
 
     public void SignUp()
@@ -69,6 +68,11 @@ public class GUI : MonoBehaviour {
         token = "";
         Back();
     }
+
+    public void OkButton()
+    {
+        canvas.transform.Find("Error").gameObject.SetActive(false);
+    }
 	
     IEnumerator LogIn(WWW www)
     {
@@ -80,6 +84,32 @@ public class GUI : MonoBehaviour {
             yield break;
         }
         JSONObject json = new JSONObject(www.text);
+
+        token = json.getString("token");
+
+        if (token != "")
+        {
+            panel.SetActive(false);
+            panel = canvas.transform.Find("Menu").gameObject;
+            panel.SetActive(true);
+        }else
+        {
+            canvas.transform.Find("Error").gameObject.SetActive(true);
+        }
+
         Debug.Log(json);
+    }
+
+    public void selection(Dropdown dropdown)
+    {
+        switch (dropdown.value)
+        {
+            case 0:
+                panel.transform.Find("File").gameObject.SetActive(true);
+                break;
+            case 1:
+                panel.transform.Find("File").gameObject.SetActive(false);
+                break;
+        }
     }
 }
