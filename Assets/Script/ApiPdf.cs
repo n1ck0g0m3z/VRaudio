@@ -45,7 +45,7 @@ public class ApiPdf : MonoBehaviour
               */
             for (int i = 0; i < ja2.length(); i++)
             {
-                string message = ja2.getJSONObject(i).getString("name");
+                //string message = ja2.getJSONObject(i).getString("name");
 
                 JSONArray jPic = new JSONArray("[" + ja2.getJSONObject(i).getString("image_url").ToString() + "]");
                 string imgUrl = jPic.getJSONObject(0).getString("shop_image1");

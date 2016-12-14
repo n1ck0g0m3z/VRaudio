@@ -2,6 +2,8 @@
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System.Runtime.InteropServices;
+using System.Windows.Forms;
 
 public class GUIScript : MonoBehaviour {
 
@@ -10,7 +12,7 @@ public class GUIScript : MonoBehaviour {
     public string username;
     public string password;
     public string room;
-    public string file;
+    [SerializeField]private string file;
     [SerializeField]public string token;
     public GameObject canvas;
     public GameObject panel;
@@ -112,5 +114,27 @@ public class GUIScript : MonoBehaviour {
                 panel.transform.Find("File").gameObject.SetActive(false);
                 break;
         }
+    }
+
+    [DllImport("user32.dll")]
+    private static extern void OpenFileDialog(); //in your case : OpenFileDialog
+    private static OpenFileDialog openDialog;
+    public void Search()
+    {
+        openDialog = new OpenFileDialog();
+        openDialog.InitialDirectory = UnityEngine.Application.dataPath;
+        openDialog.Filter = "music files (*.mp3;*.wav)|*.MP3;*.WAV|All files (*.*)|*.*";
+        openDialog.Title = "Select some music you want to listen to during this Game session.";
+        openDialog.Multiselect = true;
+        string[] result = null;
+        if (openDialog.ShowDialog() == DialogResult.OK)
+        {
+            result = openDialog.FileNames;
+        }
+        if (openDialog.FileName == string.Empty)
+        {
+            result = null;
+        }
+        openDialog = null;
     }
 }
