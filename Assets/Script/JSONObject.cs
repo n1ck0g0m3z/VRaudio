@@ -933,8 +933,7 @@ public class JSONObject {
 					table.put(name, (JSONObject) value); 
 				else if (value is JSONArray)
 					table.put(name, (JSONArray) value);
-				else
-					Debug.LogError("JSONObject ParseObject unknown type for array.put()");
+                else table.put(name, 0);
 			}
 		}
 

@@ -2304,6 +2304,7 @@ GameObject:
   - 114: {fileID: 915324013}
   - 114: {fileID: 915324012}
   - 114: {fileID: 915324022}
+  - 114: {fileID: 915324023}
   m_Layer: 0
   m_Name: MainCamera
   m_TagString: MainCamera
@@ -2478,6 +2479,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   neck: {fileID: 937358586}
+--- !u!114 &915324023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 915324011}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e933e81d3c20c74ea6fdc708a67e3a5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queueAhead: 1
+  useRecommendedMSAALevel: 0
+  enableAdaptiveResolution: 0
+  maxRenderScale: 1
+  minRenderScale: 0.7
+  _trackingOriginType: 0
+  usePositionTracking: 1
+  useIPDInPositionTracking: 1
+  resetTrackerOnLoad: 0
 --- !u!1001 &916247452
 Prefab:
   m_ObjectHideFlags: 0

@@ -2073,6 +2073,7 @@ RectTransform:
   m_Children:
   - {fileID: 282909920}
   - {fileID: 1210675900}
+  - {fileID: 1685548941}
   m_Father: {fileID: 1983334422}
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}
@@ -4704,11 +4705,11 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 870214807}
-  m_Father: {fileID: 1983334422}
-  m_RootOrder: 7
+  m_Father: {fileID: 724513321}
+  m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 238, y: -231}
+  m_AnchoredPosition: {x: 446.6, y: -47.000046}
   m_SizeDelta: {x: 148, y: 41}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1685548942
@@ -4986,7 +4987,7 @@ MonoBehaviour:
   username: 
   password: 
   room: 
-  file: []
+  file: 
   token: 
   canvas: {fileID: 1675599783}
   panel: {fileID: 0}
@@ -5504,7 +5505,6 @@ RectTransform:
   - {fileID: 815355576}
   - {fileID: 896531173}
   - {fileID: 127820042}
-  - {fileID: 1685548941}
   m_Father: {fileID: 1675599787}
   m_RootOrder: 2
   m_AnchorMin: {x: 0.5, y: 0.5}

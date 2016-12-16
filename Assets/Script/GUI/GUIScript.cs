@@ -16,11 +16,13 @@ public class GUIScript : MonoBehaviour {
     [SerializeField]public string token;
     public GameObject canvas;
     public GameObject panel;
+    private bool create;
 
     void Awake ()
     {
         if (Instance == null)
         {
+            create = true;
             panel = canvas.transform.Find("SignIn").gameObject;
             panel.SetActive(true);
             DontDestroyOnLoad(gameObject);
@@ -34,6 +36,15 @@ public class GUIScript : MonoBehaviour {
     {
         room = GameObject.Find("RoomField").GetComponent<InputField>().text.ToString();
         GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
+        if (create)
+        {
+            string uri = "http://192.168.200.203:4000/api/room";
+            StartCoroutine(CreateRoom(uri));
+        }else
+        {
+            string uri2 = "http://192.168.200.203:4000/api/room-entry";
+            StartCoroutine(JoinRoom(uri2));
+        }
         SceneManager.LoadScene("Main");
     }
 
@@ -77,6 +88,31 @@ public class GUIScript : MonoBehaviour {
         canvas.transform.Find("Error").gameObject.SetActive(false);
     }
 	
+    IEnumerator JoinRoom(string url)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("token", token);
+        form.AddField("room_id", 1);
+        WWW www = new WWW(url, form);
+        yield return www;
+
+        /*JSONObject json = new JSONObject(www.text);
+        Debug.Log(json);*/
+    }
+
+    IEnumerator CreateRoom(string url)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("token", token);
+        form.AddField("room_name", room);
+        form.AddField("document_id", 1);
+        WWW www = new WWW(url, form);
+        yield return www;
+
+        JSONObject json = new JSONObject(www.text);
+        Debug.Log(json);
+    }
+
     IEnumerator LogIn(WWW www)
     {
         yield return www;
@@ -108,9 +144,11 @@ public class GUIScript : MonoBehaviour {
         switch (dropdown.value)
         {
             case 0:
+                create = true;
                 panel.transform.Find("File").gameObject.SetActive(true);
                 break;
             case 1:
+                create = false;
                 panel.transform.Find("File").gameObject.SetActive(false);
                 break;
         }

@@ -7,12 +7,20 @@ public class ApiPdf : MonoBehaviour
     [SerializeField]
     protected Material material;
     public string urlImg;
+    private Socket socketController;
 
     public static string keyWord;
-    // Use this for initialization
+
     void Start()
     {
-        StartCoroutine("GetJson");
+        socketController = (Socket)FindObjectOfType(typeof(Socket));
+    }
+
+    public void SetUrl(string url)
+    {
+        urlImg = url;
+
+        StartCoroutine(GetJson());
     }
 
     IEnumerator GetJson()
@@ -72,9 +80,18 @@ public class ApiPdf : MonoBehaviour
         yield return www2;
         material.mainTexture = www2.texture;
     }
-    // Update is called once per frame
+
     void Update()
     {
-
+        #if UNITY_EDITOR
+        if (OVRInput.GetUp(OVRInput.Button.DpadRight))
+        {
+            socketController.ClickAction("next");
+        }
+        else if (OVRInput.GetUp(OVRInput.Button.DpadLeft))
+        {
+            socketController.ClickAction("before");
+        }
+        #endif
     }
 }
