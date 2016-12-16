@@ -67,7 +67,7 @@ public class GUIScript : MonoBehaviour {
         username = "";
         password = "";
         room = "";
-        file = "";
+        file = null;
         token = "";
         Back();
     }
@@ -123,17 +123,17 @@ public class GUIScript : MonoBehaviour {
     {
         openDialog = new OpenFileDialog();
         openDialog.InitialDirectory = UnityEngine.Application.dataPath;
-        openDialog.Filter = "music files (*.mp3;*.wav)|*.MP3;*.WAV|All files (*.*)|*.*";
-        openDialog.Title = "Select some music you want to listen to during this Game session.";
+        openDialog.Filter = "music files (*.mp4;*.pptx)|*.MP4;*.PPTX|All files (*.*)|*.*";
+        openDialog.Title = "Select your video or pptx document";
         openDialog.Multiselect = true;
-        string[] result = null;
         if (openDialog.ShowDialog() == DialogResult.OK)
         {
-            result = openDialog.FileNames;
+            file = openDialog.FileName;
+            GameObject.Find("FileField").GetComponent<InputField>().text = file;
         }
         if (openDialog.FileName == string.Empty)
         {
-            result = null;
+            file = null;
         }
         openDialog = null;
     }

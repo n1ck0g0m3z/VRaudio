@@ -37,7 +37,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.053244703, g: 0.15099636, b: 0.19472484, a: 1}
+  m_IndirectSpecularColor: {r: 0.053244703, g: 0.15099636, b: 0.19472483, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -4053,7 +4053,7 @@ RectTransform:
   m_GameObject: {fileID: 1210675899}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4874127, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 734068898}
@@ -4063,7 +4063,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
   m_AnchoredPosition: {x: 224, y: -49.000046}
-  m_SizeDelta: {x: 400, y: 34}
+  m_SizeDelta: {x: 200, y: 34}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1210675901
 MonoBehaviour:
@@ -4986,7 +4986,7 @@ MonoBehaviour:
   username: 
   password: 
   room: 
-  file: 
+  file: []
   token: 
   canvas: {fileID: 1675599783}
   panel: {fileID: 0}
