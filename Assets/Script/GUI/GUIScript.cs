@@ -11,9 +11,11 @@ public class GUIScript : MonoBehaviour {
 
     public string username;
     public string password;
-    public string room;
+    [SerializeField]public string room;
     [SerializeField]private string file;
     [SerializeField]public string token;
+    [SerializeField]public string net;
+    [SerializeField]public string seat;
     public GameObject canvas;
     public GameObject panel;
     private bool create;
@@ -38,11 +40,11 @@ public class GUIScript : MonoBehaviour {
         GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
         if (create)
         {
-            string uri = "http://192.168.200.203:4000/api/room";
+            string uri = "http://"+net+":4000/api/room";
             StartCoroutine(CreateRoom(uri));
         }else
         {
-            string uri2 = "http://192.168.200.203:4000/api/room-entry";
+            string uri2 = "http://" + net + ":4000/api/room-entry";
             StartCoroutine(JoinRoom(uri2));
         }
         SceneManager.LoadScene("Main");
@@ -55,7 +57,7 @@ public class GUIScript : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("user_name",username);
         form.AddField("password",password);
-        WWW www = new WWW("http://192.168.200.203:4000/api/login", form);
+        WWW www = new WWW("http://" + net + ":4000/api/login", form);
         StartCoroutine(LogIn(www));
     }
 
@@ -96,8 +98,9 @@ public class GUIScript : MonoBehaviour {
         WWW www = new WWW(url, form);
         yield return www;
 
-        /*JSONObject json = new JSONObject(www.text);
-        Debug.Log(json);*/
+        JSONObject json = new JSONObject(www.text);
+        Debug.Log(json);
+        seat = json.getString("seat_position");
     }
 
     IEnumerator CreateRoom(string url)
@@ -105,12 +108,13 @@ public class GUIScript : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("token", token);
         form.AddField("room_name", room);
-        form.AddField("document_id", 1);
+       // form.AddField("document_id", 1);
         WWW www = new WWW(url, form);
         yield return www;
 
         JSONObject json = new JSONObject(www.text);
         Debug.Log(json);
+        //seat = json.getString("seat_position");
     }
 
     IEnumerator LogIn(WWW www)

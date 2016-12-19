@@ -11,7 +11,7 @@ public class Socket : MonoBehaviour
     public GUIScript guiContoller;
     private string _token;
     private bool send;
-    private int pageNumber;
+    private static int pageNumber;
     private ApiPdf api;
     private string ImgUri;
     private bool init;
@@ -21,15 +21,15 @@ public class Socket : MonoBehaviour
     {
         init = false;
         act = false;
-        pageNumber = -1;
+        pageNumber = 0;
         send = false;
         _token = guiContoller.token;
-        ws = new WebSocket("ws://192.168.200.203:4000/socket/websocket?token=" + _token);
+        ws = new WebSocket("ws://"+guiContoller.net + ":4000/socket/websocket?token=" + _token);
 
         ws.OnOpen += (sender, e) =>
         {
             Debug.Log("WebSocket Open");
-            ws.Send("{\"topic\":\"rooms:vr_presentation\",\"ref\":1, \"payload\":{},\"event\":\"phx_join\"}");
+            ws.Send("{\"topic\":\"rooms:vr_presentation\",\"ref\":1, \"payload\":{\"room_name\":\""+ guiContoller.room +"\"},\"event\":\"phx_join\"}");
             send = true;
         };
 
@@ -39,8 +39,11 @@ public class Socket : MonoBehaviour
             JSONObject data = json.getJSONObject("payload");
             if (data.has("screen_url"))
             {
-                act = true;
-                ImgUri = data.getString("screen_url");
+                if (data.getString("screen_url") != "")
+                {
+                    act = true;
+                    ImgUri = data.getString("screen_url");
+                }
             }
             Debug.Log("WebSocket Message Data: " + e.Data);
         };
@@ -62,16 +65,26 @@ public class Socket : MonoBehaviour
     void SetImgUri()
     {
         api.SetUrl(ImgUri);
+        act = false;
     }
 
     public void ClickAction(string clickEvent)
     {
-        pageNumber++;
         string data = "{\"topic\": \"rooms:vr_presentation\",\"ref\": 1,\"payload\":{\"token\":\""+
             _token + "\",\"seat_position\": 0,\"document_id\": 1,\"page\":"+pageNumber+
             ",\"page_action\": \""+clickEvent+"\"},\"event\": \"presenter:page_action\"}";
 
         ws.Send(data);
+
+        if (clickEvent == "next")
+        {
+            pageNumber++;
+        }
+        else if(pageNumber > 0)
+        {
+            pageNumber--;
+        }
+        Debug.Log(pageNumber);
     }
 
     void Update()
@@ -81,6 +94,9 @@ public class Socket : MonoBehaviour
             api = (ApiPdf)FindObjectOfType(typeof(ApiPdf));
             init = true;
 
+            SetImgUri();
+        }
+        else if (act) {
             SetImgUri();
         }
         string data = "{ \"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{ \"token\":\""+

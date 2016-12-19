@@ -4989,6 +4989,8 @@ MonoBehaviour:
   room: 
   file: 
   token: 
+  net: 192.168.23.121
+  seat: 
   canvas: {fileID: 1675599783}
   panel: {fileID: 0}
 --- !u!4 &1781281128
