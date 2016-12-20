@@ -15,7 +15,7 @@ public class GUIScript : MonoBehaviour {
     [SerializeField]private string file;
     [SerializeField]public string token;
     [SerializeField]public string net;
-    [SerializeField]public string seat;
+    [SerializeField]public int seat;
     public GameObject canvas;
     public GameObject panel;
     private bool create;
@@ -30,6 +30,7 @@ public class GUIScript : MonoBehaviour {
             DontDestroyOnLoad(gameObject);
             Instance = this;
         } else if (Instance != this) {
+            Instance.backMenu();
             Destroy(gameObject);
         }
     }
@@ -37,7 +38,6 @@ public class GUIScript : MonoBehaviour {
 	public void Join ()
     {
         room = GameObject.Find("RoomField").GetComponent<InputField>().text.ToString();
-        GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
         if (create)
         {
             string uri = "http://"+net+":4000/api/room";
@@ -47,7 +47,6 @@ public class GUIScript : MonoBehaviour {
             string uri2 = "http://" + net + ":4000/api/room-entry";
             StartCoroutine(JoinRoom(uri2));
         }
-        SceneManager.LoadScene("Main");
     }
 
     public void SignIn()
@@ -66,6 +65,14 @@ public class GUIScript : MonoBehaviour {
         panel.SetActive(false);
         panel = canvas.transform.Find("SignUp").gameObject;
         panel.SetActive(true);
+    }
+
+    public void RegisterUser()
+    {
+        username = GameObject.Find("UserField").GetComponent<InputField>().text.ToString();
+        password = GameObject.Find("PwdField").GetComponent<InputField>().text.ToString();
+        string uri = "http://" + net + ":4000/api/register";
+        StartCoroutine(signUp(uri));
     }
 
     public void Back()
@@ -89,18 +96,49 @@ public class GUIScript : MonoBehaviour {
     {
         canvas.transform.Find("Error").gameObject.SetActive(false);
     }
-	
+
+    IEnumerator signUp(string url)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("user_name",username);
+        form.AddField("password", password);
+        WWW www = new WWW(url,form);
+        yield return www;
+
+        JSONObject json = new JSONObject(www.text);
+
+        Debug.Log(json);
+        if (json.getInt("result") == 1)
+        {
+            panel.SetActive(false);
+            panel = canvas.transform.Find("Menu").gameObject;
+            panel.SetActive(true);
+        }
+        else
+        {
+            canvas.transform.Find("Error").gameObject.SetActive(true);
+        }
+    }
+
     IEnumerator JoinRoom(string url)
     {
         WWWForm form = new WWWForm();
         form.AddField("token", token);
-        form.AddField("room_id", 1);
+        form.AddField("room_name", room);
         WWW www = new WWW(url, form);
         yield return www;
 
         JSONObject json = new JSONObject(www.text);
         Debug.Log(json);
-        seat = json.getString("seat_position");
+
+        if (json.getInt("result") == 1) {
+            seat = json.getInt("seat_position");
+            GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
+            SceneManager.LoadScene("Main");
+        }else
+        {
+            canvas.transform.Find("Error").gameObject.SetActive(true);
+        }
     }
 
     IEnumerator CreateRoom(string url)
@@ -108,13 +146,22 @@ public class GUIScript : MonoBehaviour {
         WWWForm form = new WWWForm();
         form.AddField("token", token);
         form.AddField("room_name", room);
-       // form.AddField("document_id", 1);
         WWW www = new WWW(url, form);
         yield return www;
 
         JSONObject json = new JSONObject(www.text);
         Debug.Log(json);
-        //seat = json.getString("seat_position");
+
+        if (json.getInt("result") == 1)
+        {
+            seat = json.getInt("seat_position");
+            GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
+            SceneManager.LoadScene("Main");
+        }
+        else
+        {
+            canvas.transform.Find("Error").gameObject.SetActive(true);
+        }
     }
 
     IEnumerator LogIn(WWW www)
@@ -178,5 +225,12 @@ public class GUIScript : MonoBehaviour {
             file = null;
         }
         openDialog = null;
+    }
+    
+    public void backMenu()
+    {
+        canvas = GameObject.Find("Canvas");
+        panel = canvas.transform.Find("Menu").gameObject;
+        panel.SetActive(true);
     }
 }

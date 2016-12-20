@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class UserPosition : MonoBehaviour {
 
     [SerializeField]private static List<GameObject> userList = new List<GameObject>();
     [SerializeField]private int numUsers;
     [SerializeField]private GameObject expoUser;
+    private Socket socket;
+    private GUIScript guiContoller;
 
     public GameObject prefab;
     
@@ -19,11 +23,20 @@ public class UserPosition : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-   
+        socket = (Socket)FindObjectOfType(typeof(Socket));
+        guiContoller = (GUIScript)FindObjectOfType(typeof(GUIScript));
         expoUser.SetActive(true);
         userList.Add(expoUser);
         bool cont = true;
         int limit = 10;
+
+        if(guiContoller.seat == 0)
+        {
+            GameObject.Find("Canvas").transform.Find("EndButton").gameObject.SetActive(true);
+        }else
+        {
+            GameObject.Find("Canvas").transform.Find("OutButton").gameObject.SetActive(true);
+        }
         
 	    if(numUsers > 1)
         {
@@ -56,9 +69,42 @@ public class UserPosition : MonoBehaviour {
             } while (cont);
         }
 	}
-	
-	// Update is called once per frame
-	void Update () {
+
+    public void DeleteRoom()
+    {
+        string deleteUri = "http://" + guiContoller.net + ":4000/api/room-delete";
+        StartCoroutine(delRoom(deleteUri));
+    }
+
+    public void ChangeRoom()
+    {
+        socket.ws.Close();
+        socket.enabled = false;
+        SceneManager.LoadScene("logIn");
+    }
+
+    // Update is called once per frame
+    void Update () {
 	
 	}
+
+    IEnumerator delRoom(string uri)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("token", guiContoller.token);
+        form.AddField("room_name", guiContoller.room);
+        WWW www = new WWW(uri, form);
+        yield return www;
+
+        JSONObject json = new JSONObject(www.text);
+
+        Debug.Log(json);
+
+        if (json.getInt("result")==1)
+        {
+            socket.ws.Close();
+            socket.enabled = false;
+            SceneManager.LoadScene("logIn");
+        }
+    }
 }

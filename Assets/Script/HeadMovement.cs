@@ -3,8 +3,7 @@ using System.Collections;
 
 public class HeadMovement : MonoBehaviour {
 
-    [SerializeField]
-    GameObject neck;
+    [SerializeField]public GameObject neck;
 
 	// Use this for initialization
 	void Start () {
