@@ -20,14 +20,8 @@ public class Socket : MonoBehaviour
     private HeadMovement head;
     private GameObject neck;
 
-    void Start()
-    {
-        startSocket();
-    }
-
     public void startSocket()
     {
-        Debug.Log("sadafsd");
         init = false;
         act = false;
         pageNumber = 0;
