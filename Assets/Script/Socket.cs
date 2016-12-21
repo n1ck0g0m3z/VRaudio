@@ -68,7 +68,7 @@ public class Socket : MonoBehaviour
 
             if (data.has("seat_position"))
             {
-                if (data.getInt("seat_position") == _seat)
+                if (data.getInt("seat_position") != _seat)
                 {
                     Debug.Log("WebSocket Message Data: " + e.Data);
                 }
@@ -131,15 +131,14 @@ public class Socket : MonoBehaviour
         else if (act) {
             SetImgUri();
         }
-        /*
+        
         string data = "{ \"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{ \"token\":\""+
                 _token +"\", \"seat_position\": "+_seat+", \"head_position\": { \"x\": 0, \"y\": 0, \"z\""+
                 ": 0 }, \"angle\": { \"x\": "+ neck.transform.localEulerAngles.x +
                 ", \"y\": "+ neck.transform.localEulerAngles.y + ", \"z\": "+ neck.transform.localEulerAngles.z + 
                 " },\"name\":\""+guiContoller.username+"\"},\"event\":\"presenter:motion\"}";
 
-        if(send) ws.Send(data);*/
-        Debug.Log(neck.transform.localEulerAngles);
+        if(send) ws.Send(data);
 
         if (Input.GetKeyUp("s") && send)
         {
