@@ -19,6 +19,7 @@ public class GUIScript : MonoBehaviour {
     public GameObject canvas;
     public GameObject panel;
     private bool create;
+    private Socket socket;
 
     void Awake ()
     {
@@ -133,9 +134,12 @@ public class GUIScript : MonoBehaviour {
 
         if (json.getInt("result") == 1) {
             seat = json.getInt("seat_position");
-            GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
+            socket = GameObject.Find("UserController").GetComponent<Socket>();
+            socket.enabled = true;
             SceneManager.LoadScene("Main");
-        }else
+            socket.startSocket();
+        }
+        else
         {
             canvas.transform.Find("Error").gameObject.SetActive(true);
         }
@@ -155,8 +159,10 @@ public class GUIScript : MonoBehaviour {
         if (json.getInt("result") == 1)
         {
             seat = json.getInt("seat_position");
-            GameObject.Find("UserController").GetComponent<Socket>().enabled = true;
+            socket = GameObject.Find("UserController").GetComponent<Socket>();
+            socket.enabled = true;
             SceneManager.LoadScene("Main");
+            socket.startSocket();
         }
         else
         {

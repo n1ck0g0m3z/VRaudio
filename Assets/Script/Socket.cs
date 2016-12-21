@@ -9,7 +9,7 @@ public class Socket : MonoBehaviour
     [SerializeField]public WebSocket ws;
     GameObject userController;
     public GUIScript guiContoller;
-    private string _token;
+    [SerializeField]private string _token;
     private bool send;
     private static int pageNumber;
     private ApiPdf api;
@@ -22,6 +22,12 @@ public class Socket : MonoBehaviour
 
     void Start()
     {
+        startSocket();
+    }
+
+    public void startSocket()
+    {
+        Debug.Log("sadafsd");
         init = false;
         act = false;
         pageNumber = 0;
@@ -62,7 +68,7 @@ public class Socket : MonoBehaviour
 
             if (data.has("seat_position"))
             {
-                if (data.getInt("seat_position") != _seat)
+                if (data.getInt("seat_position") == _seat)
                 {
                     Debug.Log("WebSocket Message Data: " + e.Data);
                 }
@@ -125,13 +131,15 @@ public class Socket : MonoBehaviour
         else if (act) {
             SetImgUri();
         }
+        /*
         string data = "{ \"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{ \"token\":\""+
                 _token +"\", \"seat_position\": "+_seat+", \"head_position\": { \"x\": 0, \"y\": 0, \"z\""+
                 ": 0 }, \"angle\": { \"x\": "+ neck.transform.localEulerAngles.x +
                 ", \"y\": "+ neck.transform.localEulerAngles.y + ", \"z\": "+ neck.transform.localEulerAngles.z + 
                 " },\"name\":\""+guiContoller.username+"\"},\"event\":\"presenter:motion\"}";
 
-        if(send) ws.Send(data);
+        if(send) ws.Send(data);*/
+        Debug.Log(neck.transform.localEulerAngles);
 
         if (Input.GetKeyUp("s") && send)
         {
