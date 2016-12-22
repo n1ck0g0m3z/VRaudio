@@ -8,6 +8,7 @@ public class UserPosition : MonoBehaviour {
     [SerializeField]private static List<GameObject> userList = new List<GameObject>();
     [SerializeField]private int numUsers;
     [SerializeField]private GameObject expoUser;
+    [SerializeField]private GameObject cam;
     public List<int> userSeat = new List<int>();
     private Socket socket;
     private GUIScript guiContoller;
@@ -32,13 +33,14 @@ public class UserPosition : MonoBehaviour {
         int limit = 10;
         numUsers = guiContoller.seat;
 
-        GameObject.Find("ExpoCyber").SetActive(true);
+        //GameObject.Find("ExpoCyber").SetActive(true);
 
         if (numUsers == 0)
         {
-            GameObject.Find("ExpoCyber").transform.FindChild("MainCamera").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("EndButton").gameObject.SetActive(true);
-        }else
+            cam.gameObject.SetActive(true);
+        }
+        else
         {
             GameObject.Find("Canvas").transform.Find("OutButton").gameObject.SetActive(true);
         }
@@ -169,6 +171,8 @@ public class UserPosition : MonoBehaviour {
 
     public void DeleteUser(int seat)
     {
-
+        userSeat.Remove(seat);
+        userList.Remove(GameObject.Find("user" + seat));
+        Destroy(GameObject.Find("user" + seat).gameObject);
     }
 }

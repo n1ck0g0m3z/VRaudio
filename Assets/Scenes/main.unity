@@ -125,6 +125,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numUsers: 14
   expoUser: {fileID: 1646163501}
+  cam: {fileID: 915324011}
+  userSeat: 
   prefab: {fileID: 1000013815577818, guid: 71f3a40bce477ea44846f6c8eae5aab7, type: 2}
 --- !u!4 &89087421
 Transform:
@@ -138,7 +140,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
 --- !u!1 &121827693
 GameObject:
   m_ObjectHideFlags: 0
@@ -2555,7 +2557,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!4 &900561496 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000011267146342, guid: 635c0447018b6f94a91aec2c63afe35e,
@@ -2582,7 +2584,7 @@ GameObject:
   - 114: {fileID: 915324022}
   - 114: {fileID: 915324023}
   m_Layer: 0
-  m_Name: MainCamera
+  m_Name: ExpoCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2735,14 +2737,14 @@ Transform:
     type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 915324011}
-  m_LocalRotation: {x: -0, y: 0.064329684, z: -0, w: 0.99792874}
-  m_LocalPosition: {x: -0.026133925, y: 1.722, z: -0.201377}
+  m_LocalRotation: {x: -0, y: 0.905654, z: -0, w: -0.42401758}
+  m_LocalPosition: {x: 6.496, y: 1.722, z: 14.65}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 230.177, z: 0}
   m_Children:
   - {fileID: 1800200535}
-  m_Father: {fileID: 1646163503}
-  m_RootOrder: 2
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
 --- !u!114 &915324022
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2969,7 +2971,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
 --- !u!4 &1161541837 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010324832188, guid: 635c0447018b6f94a91aec2c63afe35e,
@@ -3157,7 +3159,7 @@ AudioSource:
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
-  Mute: 0
+  Mute: 1
   Spatialize: 0
   Priority: 128
   DopplerLevel: 1
@@ -3229,7 +3231,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
 --- !u!1 &1219836230
 GameObject:
   m_ObjectHideFlags: 0
@@ -4147,7 +4149,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: cf3910b7639e12447827e45f63f60201, type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 100004, guid: cf3910b7639e12447827e45f63f60201, type: 3}
       propertyPath: m_Name
@@ -4331,10 +4333,6 @@ Prefab:
 --- !u!1 &1646163501 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 100004, guid: cf3910b7639e12447827e45f63f60201, type: 3}
-  m_PrefabInternal: {fileID: 1646163500}
---- !u!4 &1646163503 stripped
-Transform:
-  m_PrefabParentObject: {fileID: 400006, guid: cf3910b7639e12447827e45f63f60201, type: 3}
   m_PrefabInternal: {fileID: 1646163500}
 --- !u!4 &1692391404 stripped
 Transform:

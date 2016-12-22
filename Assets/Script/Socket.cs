@@ -51,11 +51,11 @@ public class Socket : MonoBehaviour
             JSONObject json = new JSONObject(e.Data);
             JSONObject data = json.getJSONObject("payload");
 
-            if (data.has("body"))
+            if (data.has("body") && data.has("seat"))
             {
-                delPos = data.getInt("seat");
+                delPos = int.Parse(data.getString("seat"));
                 delAct = true;
-                Debug.Log(delPos);
+                Debug.Log(data);
             }
 
             if(data.has("response"))
@@ -155,7 +155,7 @@ public class Socket : MonoBehaviour
         if(delAct)
         {
             delAct = false;
-            //userPos.DeleteUser();
+            userPos.DeleteUser(delPos);
         }
 
         if(newAct)
@@ -194,7 +194,7 @@ public class Socket : MonoBehaviour
     public void outMessage()
     {
         string stream = "{\"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{\"seat\":\"" +
-                guiContoller.seat + "\",\"body\":\"out\"}, \"event\":\"new:message\"}";
+                guiContoller.seat + "\",\"body\":\"out\"}, \"event\":\"presenter:outmessage\"}";
 
         ws.Send(stream);
     }
