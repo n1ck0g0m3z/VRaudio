@@ -17,7 +17,9 @@ public class Socket : MonoBehaviour
     private bool init;
     private bool act;
     private int newPos;
+    private int delPos;
     private bool newAct;
+    private bool delAct;
     private int _seat;
     private HeadMovement head;
     private GameObject neck;
@@ -26,8 +28,10 @@ public class Socket : MonoBehaviour
     public void startSocket()
     {
         newPos = 0;
+        delPos = 0;
         init = false;
         act = false;
+        delAct = false;
         newAct = false;
         pageNumber = 0;
         send = false;
@@ -46,6 +50,13 @@ public class Socket : MonoBehaviour
         {
             JSONObject json = new JSONObject(e.Data);
             JSONObject data = json.getJSONObject("payload");
+
+            if (data.has("body"))
+            {
+                delPos = data.getInt("seat");
+                delAct = true;
+                Debug.Log(delPos);
+            }
 
             if(data.has("response"))
             {
@@ -141,6 +152,12 @@ public class Socket : MonoBehaviour
             SetImgUri();
         }
 
+        if(delAct)
+        {
+            delAct = false;
+            //userPos.DeleteUser();
+        }
+
         if(newAct)
         {
             Debug.Log("yonderuuu");
@@ -176,8 +193,8 @@ public class Socket : MonoBehaviour
 
     public void outMessage()
     {
-        string stream = "{\"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{\"user\":\"" +
-                guiContoller.username + "\",\"body\":\"out\"}, \"event\":\"new:message\"}";
+        string stream = "{\"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{\"seat\":\"" +
+                guiContoller.seat + "\",\"body\":\"out\"}, \"event\":\"new:message\"}";
 
         ws.Send(stream);
     }
