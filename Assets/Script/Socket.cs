@@ -151,4 +151,12 @@ public class Socket : MonoBehaviour
             ws = null;
         }
     }
+
+    public void outMessage()
+    {
+        string stream = "{\"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{\"user\":\"" +
+                guiContoller.username + "\",\"body\":\"out\"}, \"event\":\"new:message\"}";
+
+        ws.Send(stream);
+    }
 }

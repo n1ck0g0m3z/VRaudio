@@ -29,16 +29,20 @@ public class UserPosition : MonoBehaviour {
         userList.Add(expoUser);
         bool cont = true;
         int limit = 10;
+        numUsers = guiContoller.seat;
 
-        if(guiContoller.seat == 0)
+        GameObject.Find("ExpoCyber").SetActive(true);
+
+        if (numUsers == 0)
         {
+            GameObject.Find("ExpoCyber").transform.FindChild("MainCamera").gameObject.SetActive(true);
             GameObject.Find("Canvas").transform.Find("EndButton").gameObject.SetActive(true);
         }else
         {
             GameObject.Find("Canvas").transform.Find("OutButton").gameObject.SetActive(true);
         }
         
-	    if(numUsers > 1)
+	    if(numUsers > 0)
         {
             int rowAux = 0;
             do
@@ -46,6 +50,7 @@ public class UserPosition : MonoBehaviour {
                 if (numUsers / 10 < 1)
                 {
                     limit = numUsers % 10;
+                    limit++;
                     cont = false;
                 }
                 int aux = 0;
@@ -53,6 +58,7 @@ public class UserPosition : MonoBehaviour {
                 {
                     GameObject user = (GameObject)Instantiate(prefab);
                     user.name = "user" + i;
+
                     if (i % 2 == 0)
                     {
                         user.transform.position = userPos[0] + new Vector3((float)0.9 * -aux, (float)0.487 * rowAux, (float)-0.979 * rowAux);
@@ -62,11 +68,14 @@ public class UserPosition : MonoBehaviour {
                         user.transform.position = userPos[0] + new Vector3((float)0.9 * aux, (float)0.487 * rowAux, (float)-0.979 * rowAux);
                         aux++;
                     }
+
                     userList.Add(user);
                 }
                 rowAux++;
-                numUsers -= 10;
+                numUsers -= 9;
             } while (cont);
+
+            GameObject.Find("user"+guiContoller.seat).transform.FindChild("MainCamera").gameObject.SetActive(true);
         }
 	}
 
@@ -78,6 +87,7 @@ public class UserPosition : MonoBehaviour {
 
     public void ChangeRoom()
     {
+        socket.outMessage();
         socket.ws.Close();
         socket.enabled = false;
         SceneManager.LoadScene("logIn");

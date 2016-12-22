@@ -83,7 +83,7 @@ public class ApiPdf : MonoBehaviour
 
     void Update()
     {
-        #if UNITY_EDITOR
+        #if UNITY_EDITOR_WIN
         if (OVRInput.GetUp(OVRInput.Button.DpadRight))
         {
             socketController.ClickAction("next");
