@@ -19,6 +19,7 @@ public class Socket : MonoBehaviour
     private int _seat;
     private HeadMovement head;
     private GameObject neck;
+    private UserPosition userPos;
 
     public void startSocket()
     {
@@ -64,6 +65,13 @@ public class Socket : MonoBehaviour
             {
                 if (data.getInt("seat_position") != _seat)
                 {
+                    if (data.has("head_position"))
+                    {
+                        if (_seat != 0 && userPos.userSeat.IndexOf(_seat) ==-1)
+                        {
+                            Debug.Log("INNNNN");
+                        }
+                    }
                     Debug.Log("WebSocket Message Data: " + e.Data);
                 }
             }
@@ -115,6 +123,7 @@ public class Socket : MonoBehaviour
     {
         if (!init && act)
         {
+            userPos = (UserPosition)FindObjectOfType(typeof(UserPosition));
             head = (HeadMovement)FindObjectOfType(typeof(HeadMovement));
             neck = head.neck;
             api = (ApiPdf)FindObjectOfType(typeof(ApiPdf));

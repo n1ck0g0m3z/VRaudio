@@ -8,6 +8,7 @@ public class UserPosition : MonoBehaviour {
     [SerializeField]private static List<GameObject> userList = new List<GameObject>();
     [SerializeField]private int numUsers;
     [SerializeField]private GameObject expoUser;
+    public List<int> userSeat = new List<int>();
     private Socket socket;
     private GUIScript guiContoller;
 
@@ -56,8 +57,9 @@ public class UserPosition : MonoBehaviour {
                 int aux = 0;
                 for (int i = 1; i < limit ; i++)
                 {
+                    int seat = (rowAux != 0) ? rowAux * 10 + i : i;
                     GameObject user = (GameObject)Instantiate(prefab);
-                    user.name = "user" + i;
+                    user.name = "user" + seat;
 
                     if (i % 2 == 0)
                     {
@@ -68,7 +70,7 @@ public class UserPosition : MonoBehaviour {
                         user.transform.position = userPos[0] + new Vector3((float)0.9 * aux, (float)0.487 * rowAux, (float)-0.979 * rowAux);
                         aux++;
                     }
-
+                    userSeat.Add(seat);
                     userList.Add(user);
                 }
                 rowAux++;
