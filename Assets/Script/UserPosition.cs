@@ -119,4 +119,56 @@ public class UserPosition : MonoBehaviour {
             SceneManager.LoadScene("logIn");
         }
     }
+
+    public void CreateUser(int seat)
+    {
+        int limit = 10;
+        bool cont = true;
+        int rowAux = 0;
+        int numRest = seat;
+        GameObject user = null;
+
+        do{
+            if (numRest / 10 < 1)
+            {
+                limit = numRest % 10;
+                limit++;
+                cont = false;
+            }
+            int aux = 0;
+            for (int i = 1; i < limit; i++)
+            {
+                int position = (rowAux != 0) ? rowAux * 10 + i : i;
+                
+                if (i % 2 == 0 && position == seat)
+                {
+                    user = (GameObject)Instantiate(prefab);
+                    user.name = "user" + position;
+                    user.transform.position = userPos[0] + new Vector3((float)0.9 * -aux, (float)0.487 * rowAux, (float)-0.979 * rowAux);
+                    userSeat.Add(position);
+                    userList.Add(user);
+                }
+                else if(position == seat)
+                {
+                    user = (GameObject)Instantiate(prefab);
+                    user.name = "user" + position;
+                    user.transform.position = userPos[0] + new Vector3((float)0.9 * aux, (float)0.487 * rowAux, (float)-0.979 * rowAux);
+                    userSeat.Add(position);
+                    userList.Add(user);
+                }
+                else
+                {
+                    Debug.Log("nadaaaaaa " + seat);
+                    aux++;
+                }
+            }
+            rowAux++;
+            numRest -= 9;
+        } while (cont);
+    }
+
+    public void DeleteUser(int seat)
+    {
+
+    }
 }

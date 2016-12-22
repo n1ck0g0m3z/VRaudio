@@ -16,6 +16,8 @@ public class Socket : MonoBehaviour
     private string ImgUri;
     private bool init;
     private bool act;
+    private int newPos;
+    private bool newAct;
     private int _seat;
     private HeadMovement head;
     private GameObject neck;
@@ -23,8 +25,10 @@ public class Socket : MonoBehaviour
 
     public void startSocket()
     {
+        newPos = 0;
         init = false;
         act = false;
+        newAct = false;
         pageNumber = 0;
         send = false;
         _seat = guiContoller.seat;
@@ -67,8 +71,10 @@ public class Socket : MonoBehaviour
                 {
                     if (data.has("head_position"))
                     {
-                        if (_seat != 0 && userPos.userSeat.IndexOf(_seat) ==-1)
+                        if (data.getInt("seat_position") != 0 && userPos.userSeat.IndexOf(data.getInt("seat_position")) ==-1)
                         {
+                            newPos = data.getInt("seat_position");
+                            newAct = true;
                             Debug.Log("INNNNN");
                         }
                     }
@@ -133,6 +139,13 @@ public class Socket : MonoBehaviour
         }
         else if (act) {
             SetImgUri();
+        }
+
+        if(newAct)
+        {
+            Debug.Log("yonderuuu");
+            newAct = false;
+            userPos.CreateUser(newPos);
         }
         
         string data = "{ \"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{ \"token\":\""+
