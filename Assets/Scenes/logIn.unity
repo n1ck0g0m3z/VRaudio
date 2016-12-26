@@ -5001,7 +5001,7 @@ MonoBehaviour:
   room: 
   file: 
   token: 
-  net: 192.168.23.121
+  net: 163.44.164.192
   seat: 0
   canvas: {fileID: 1675599783}
   panel: {fileID: 0}
@@ -5030,6 +5030,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   guiContoller: {fileID: 1781281127}
+  _token: 
 --- !u!1 &1784243997
 GameObject:
   m_ObjectHideFlags: 0

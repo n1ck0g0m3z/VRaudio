@@ -24,9 +24,15 @@ public class Socket : MonoBehaviour
     private HeadMovement head;
     private GameObject neck;
     private UserPosition userPos;
+    private int changePos;
+    private Vector3 headAngle;
+    private GameObject userObject;
+    private GameObject moveNeck;
 
     public void startSocket()
     {
+        JSONObject headJson;
+        changePos = -1;
         newPos = 0;
         delPos = 0;
         init = false;
@@ -88,8 +94,14 @@ public class Socket : MonoBehaviour
                             newAct = true;
                             Debug.Log("INNNNN");
                         }
+                        changePos = data.getInt("seat_position");
+                        headJson = data.getJSONObject("angle");
+                        headAngle = new Vector3((float)headJson.getDouble("x"), (float)headJson.getDouble("y"), (float)headJson.getDouble("z"));
                     }
-                    Debug.Log("WebSocket Message Data: " + e.Data);
+                    Debug.Log("WebSocket Message Data: " + headAngle);
+                }else
+                {
+                    changePos = -1;
                 }
             }
         };
@@ -138,6 +150,17 @@ public class Socket : MonoBehaviour
 
     void Update()
     {
+        if(changePos >= 0)
+        {
+            userObject = (changePos == 0) ? GameObject.Find("ExpoCyber"):GameObject.Find("user" + changePos);
+
+            moveNeck = userObject.transform.Find("Armature").gameObject.transform.Find("Hips").gameObject;
+            moveNeck = moveNeck.transform.Find("Spine").gameObject.transform.Find("Chest").gameObject;
+            moveNeck = moveNeck.transform.Find("Neck").gameObject.transform.Find("Head").gameObject;
+
+            moveNeck.transform.rotation = Quaternion.Euler(headAngle);
+        }
+
         if (!init && act)
         {
             userPos = (UserPosition)FindObjectOfType(typeof(UserPosition));
