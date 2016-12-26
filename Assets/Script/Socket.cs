@@ -96,7 +96,13 @@ public class Socket : MonoBehaviour
                         }
                         changePos = data.getInt("seat_position");
                         headJson = data.getJSONObject("angle");
-                        headAngle = new Vector3((float)headJson.getDouble("x"), (float)headJson.getDouble("y"), (float)headJson.getDouble("z"));
+                        if (changePos == 0)
+                        {
+                            headAngle = new Vector3((float)headJson.getDouble("x"), (float)headJson.getDouble("y") - 132, (float)headJson.getDouble("z"));
+                        }else
+                        {
+                            headAngle = new Vector3((float)headJson.getDouble("x"), (float)headJson.getDouble("y"), (float)headJson.getDouble("z"));
+                        }
                     }
                     Debug.Log("WebSocket Message Data: " + headAngle);
                 }else
