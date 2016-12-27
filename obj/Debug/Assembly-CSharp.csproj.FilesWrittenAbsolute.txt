@@ -1,0 +1,16 @@
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/UnityEngine.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/UnityEditor.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/UnityEngine.UI.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/UnityEngine.Networking.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Google.ProtocolBuffers.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/System.Windows.Forms.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/websocket-sharp.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Mono.Cecil.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Unity.SerializationLogic.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Unity.DataContract.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/ICSharpCode.NRefactory.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Unity.UNetWeaver.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Unity.UNetWeaver.dll.mdb
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Unity.CecilTools.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Mono.Cecil.Pdb.dll
+/Users/usr0102328/Documents/VRaudio-master/Temp/bin/Debug/Mono.Cecil.Mdb.dll

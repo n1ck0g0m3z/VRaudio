@@ -12,6 +12,7 @@ public class UserPosition : MonoBehaviour {
     public List<int> userSeat = new List<int>();
     private Socket socket;
     private GUIScript guiContoller;
+	public UnityEngine.UI.Text textcanvas;
 
     public GameObject prefab;
     
@@ -175,4 +176,9 @@ public class UserPosition : MonoBehaviour {
         userList.Remove(GameObject.Find("user" + seat));
         Destroy(GameObject.Find("user" + seat).gameObject);
     }
+
+	public void showMess(string mess)
+	{
+		textcanvas.text = mess;
+	}
 }

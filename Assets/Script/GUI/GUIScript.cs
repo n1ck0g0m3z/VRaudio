@@ -18,14 +18,14 @@ public class GUIScript : MonoBehaviour {
     [SerializeField]public int seat;
     public GameObject canvas;
     public GameObject panel;
-    private bool create;
+	[SerializeField]private bool create;
     private Socket socket;
 
     void Awake ()
     {
         if (Instance == null)
         {
-            create = true;
+            create = false;
             panel = canvas.transform.Find("SignIn").gameObject;
             panel.SetActive(true);
             DontDestroyOnLoad(gameObject);
@@ -43,6 +43,7 @@ public class GUIScript : MonoBehaviour {
         {
             string uri = "http://"+net+":4000/api/room";
             StartCoroutine(CreateRoom(uri));
+			create = false;
         }else
         {
             string uri2 = "http://" + net + ":4000/api/room-entry";
@@ -201,13 +202,13 @@ public class GUIScript : MonoBehaviour {
         switch (dropdown.value)
         {
             case 0:
-                create = true;
-                panel.transform.Find("File").gameObject.SetActive(true);
-                break;
-            case 1:
                 create = false;
                 panel.transform.Find("File").gameObject.SetActive(false);
                 break;
+			case 1:
+				create = true;
+				panel.transform.Find("File").gameObject.SetActive(true);
+				break;
         }
     }
 

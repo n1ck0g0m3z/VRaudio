@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
+using UnityEngine.UI;	
 
 public class GUIMiddleware : MonoBehaviour {
     protected GUIScript gui;

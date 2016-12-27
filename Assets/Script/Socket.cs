@@ -28,9 +28,12 @@ public class Socket : MonoBehaviour
     private Vector3 headAngle;
     private GameObject userObject;
     private GameObject moveNeck;
+	public bool mes;
+	public string text;
 
     public void startSocket()
     {
+		mes = false;
         JSONObject headJson;
         changePos = -1;
         newPos = 0;
@@ -72,6 +75,12 @@ public class Socket : MonoBehaviour
                     act = true;
                 }
             }
+
+			if(data.has("user") && data.has("body")){
+				Debug.LogError(data.getString("body"));
+				text = data.getString("body");
+				mes = true;
+			}
 
             if (data.has("screen_url"))
             {
@@ -156,17 +165,6 @@ public class Socket : MonoBehaviour
 
     void Update()
     {
-        if(changePos >= 0)
-        {
-            userObject = (changePos == 0) ? GameObject.Find("ExpoCyber"):GameObject.Find("user" + changePos);
-
-            moveNeck = userObject.transform.Find("Armature").gameObject.transform.Find("Hips").gameObject;
-            moveNeck = moveNeck.transform.Find("Spine").gameObject.transform.Find("Chest").gameObject;
-            moveNeck = moveNeck.transform.Find("Neck").gameObject.transform.Find("Head").gameObject;
-
-            moveNeck.transform.rotation = Quaternion.Euler(headAngle);
-        }
-
         if (!init && act)
         {
             userPos = (UserPosition)FindObjectOfType(typeof(UserPosition));
@@ -193,6 +191,11 @@ public class Socket : MonoBehaviour
             newAct = false;
             userPos.CreateUser(newPos);
         }
+
+		if (mes) {
+			mes = false;
+			userPos.showMess (text);
+		}
         
         string data = "{ \"topic\":\"rooms:vr_presentation\", \"ref\":1, \"payload\":{ \"token\":\""+
                 _token +"\", \"seat_position\": "+_seat+", \"head_position\": { \"x\": 0, \"y\": 0, \"z\""+
@@ -208,6 +211,17 @@ public class Socket : MonoBehaviour
             
             ws.Send(stream);
         }
+
+		if(changePos >= 0)
+		{
+			userObject = (changePos == 0) ? GameObject.Find("ExpoCyber") : GameObject.Find("user" + changePos);
+
+			moveNeck = userObject.transform.Find("Armature").gameObject.transform.Find("Hips").gameObject;
+			moveNeck = moveNeck.transform.Find("Spine").gameObject.transform.Find("Chest").gameObject;
+			moveNeck = moveNeck.transform.Find("Neck").gameObject.transform.Find("Head").gameObject;
+
+			moveNeck.transform.rotation = Quaternion.Euler(headAngle);
+		}
 
     }
 
