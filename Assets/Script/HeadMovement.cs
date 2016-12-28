@@ -22,7 +22,7 @@ public class HeadMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         neck.transform.rotation = Quaternion.Euler(this.transform.localEulerAngles.x, this.transform.localEulerAngles.y, this.transform.localEulerAngles.z);
-        this.transform.position = neck.transform.position;
+        //this.transform.position = neck.transform.position;
         this.transform.position = new Vector3(neck.transform.position.x, neck.transform.position.y + (float)0.12, neck.transform.position.z);
     }
 }

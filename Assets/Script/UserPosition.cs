@@ -12,7 +12,7 @@ public class UserPosition : MonoBehaviour {
     public List<int> userSeat = new List<int>();
     private Socket socket;
     private GUIScript guiContoller;
-
+    public GameObject canvas;
     public GameObject prefab;
     
     private static Vector3[] userPos = {
@@ -37,12 +37,12 @@ public class UserPosition : MonoBehaviour {
 
         if (numUsers == 0)
         {
-            GameObject.Find("Canvas").transform.Find("EndButton").gameObject.SetActive(true);
+            canvas.transform.Find("EndButton").gameObject.SetActive(true);
             cam.gameObject.SetActive(true);
         }
         else
         {
-            GameObject.Find("Canvas").transform.Find("OutButton").gameObject.SetActive(true);
+            canvas.transform.Find("OutButton").gameObject.SetActive(true);
         }
         
 	    if(numUsers > 0)

@@ -11,7 +11,7 @@ namespace VRStandardAssets.Utils
     {
         public event Action<RaycastHit> OnRaycasthit;                   // This event is called every frame that the user's gaze is over a collider.
 
-        //[SerializeField] private Keyboard keyboard;
+        [SerializeField] private Keyboard keyboard;
         [SerializeField] private Transform m_Camera;
         [SerializeField] private LayerMask m_ExclusionLayers;           // Layers to exclude from the raycast.
         [SerializeField] private Reticle m_Reticle;                     // The reticle, if applicable.
@@ -139,11 +139,11 @@ namespace VRStandardAssets.Utils
 
         private void HandleDoubleClick()
         {
-            /*if (keyboard)
+            if (keyboard)
             {
                 if(keyboard.getFlag())keyboard.activateKeyBoard();
             }
-            */
+            
             if (m_CurrentInteractible != null)
                 m_CurrentInteractible.DoubleClick();
 
